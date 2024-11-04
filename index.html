@@ -148,9 +148,17 @@
 
       .board__beench--section {
         width: 80px;
+        display: flex;
+        flex-direction: column;
         height: auto;
         border: solid 1px #eee;
         background: #222;
+        gap: 8px;
+      }
+
+      .player__image {
+        width: 60px;
+        margin: 0 auto;
       }
 
       @media (max-width: 500px) {
@@ -162,6 +170,28 @@
         }
       }
     </style>
+    <script type="module">
+      const $ = (el) => document.querySelector(el);
+      const $$ = (els) => document.querySelectorAll(el);
+
+      const imageInput = $("#payer__input--image");
+      const playersSection = $("#beench__section");
+
+      imageInput.addEventListener("change", (event) => {
+        const [file] = event.target.files;
+
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (eventReader) => {
+            const imgElement = document.createElement("img");
+            imgElement.src = eventReader.target.result;
+            imgElement.className = "player__image";
+            playersSection.appendChild(imgElement);
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
   </head>
   <body>
     <header class="header__section">
@@ -184,7 +214,7 @@
             </div>
           </div>
         </section>
-        <section class="board__beench--section">
+        <section id="beench__section" class="board__beench--section">
           <section class="buttons__section">
             <label class="player__button player__button--add">
               <svg
