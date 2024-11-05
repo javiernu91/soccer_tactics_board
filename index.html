@@ -159,6 +159,8 @@
       .player__image {
         width: 60px;
         margin: 0 auto;
+        object-fit: cover;
+        cursor: grab;
       }
 
       @media (max-width: 500px) {
@@ -177,20 +179,45 @@
       const imageInput = $("#payer__input--image");
       const playersSection = $("#beench__section");
 
+      function createItem(src) {
+        const imgElement = document.createElement("img");
+        imgElement.draggable = true;
+        imgElement.src = src;
+        imgElement.className = "player__image";
+
+        imgElement.addEventListener("dragstart", handlerDragStart);
+        imgElement.addEventListener("dragend", handlerDragEnd);
+
+        playersSection.appendChild(imgElement);
+        console.log(imgElement);
+        return imgElement;
+      }
+
       imageInput.addEventListener("change", (event) => {
         const [file] = event.target.files;
 
         if (file) {
           const reader = new FileReader();
           reader.onload = (eventReader) => {
-            const imgElement = document.createElement("img");
-            imgElement.src = eventReader.target.result;
-            imgElement.className = "player__image";
-            playersSection.appendChild(imgElement);
+            createItem(eventReader.target.result);
           };
           reader.readAsDataURL(file);
         }
       });
+
+      let draggedElement = null;
+      let sourceContainer = null;
+
+      function handlerDragStart(event) {
+        draggedElement = event.target;
+        const sourceContainer = draggedElement.parentNode;
+        console.log(draggedElement);
+      }
+
+      function handlerDragEnd(event) {
+        draggedElement = null;
+        sourceContainer = null;
+      }
     </script>
   </head>
   <body>
