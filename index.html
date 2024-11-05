@@ -163,6 +163,23 @@
         cursor: grab;
       }
 
+      .field__container--section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        aspect-ratio: 68/105;
+        width: 100%;
+        margin: 32px auto;
+        display: flex;
+        flex-wrap: wrap;  
+      }
+      
+      .field__section {
+        background: transparent;
+        width: 20%;
+        height: 10%;
+      }
+
       @media (max-width: 500px) {
         .board__field--circle {
           width: 75px;
@@ -174,7 +191,7 @@
     </style>
     <script type="module">
       const $ = (el) => document.querySelector(el);
-      const $$ = (els) => document.querySelectorAll(el);
+      const $$ = (els) => document.querySelectorAll(els);
 
       const imageInput = $("#payer__input--image");
       const playersSection = $("#beench__section");
@@ -208,16 +225,21 @@
       let draggedElement = null;
       let sourceContainer = null;
 
-      const boardSection = $("#field");
+      
+      const boardSection = $$(".field__section");
 
-      boardSection.addEventListener("dragover", handleDragOver);
-      boardSection.addEventListener("drop", handleDrop);
-      boardSection.addEventListener("dragleave", handleDragLeave);
+      boardSection.forEach(section => {
+        section.addEventListener("dragover", handleDragOver);
+        section.addEventListener("drop", handleDrop);
+        section.addEventListener("dragleave", handleDragLeave);
+
+      })
+
 
       function handleDrop(event) {
         event.preventDefault();
 
-        const { currenTarget, dataTransfer } = event;
+        const { currentTarget, dataTransfer } = event;
 
         if (sourceContainer && draggedElement) {
           sourceContainer.removeChild(draggedElement);
@@ -226,25 +248,23 @@
         if (draggedElement) {
           const src = dataTransfer.getData("text/plain");
           const imgElement = createItem(src);
-          boardSection.appendChild(imgElement);
+          currentTarget.appendChild(imgElement);
         }
-        console.log("drop");
+      
       }
       function handleDragOver(event) {
         event.preventDefault();
-        console.log("dragOver");
+        
       }
       function handleDragLeave(event) {
         event.preventDefault();
-        console.log("dragLeave");
+        
       }
 
       function handlerDragStart(event) {
         draggedElement = event.target;
         sourceContainer = draggedElement.parentNode;
-        console.log("Source COntainer");
-        console.log(sourceContainer);
-        event = dataTransfer.setData("text/plain", draggedElement.src);
+        event.dataTransfer.setData("text/plain", draggedElement.src);
       }
 
       function handlerDragEnd(event) {
@@ -272,6 +292,58 @@
             <div class="visitor__area">
               <div class="visitor__area--small"></div>
             </div>
+          </div>
+          <div class="field__container--section">
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
+            <div class="field__section"></div>
           </div>
         </section>
         <section id="beench__section" class="board__beench--section">
