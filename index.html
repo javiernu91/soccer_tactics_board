@@ -208,10 +208,43 @@
       let draggedElement = null;
       let sourceContainer = null;
 
+      const boardSection = $("#field");
+
+      boardSection.addEventListener("dragover", handleDragOver);
+      boardSection.addEventListener("drop", handleDrop);
+      boardSection.addEventListener("dragleave", handleDragLeave);
+
+      function handleDrop(event) {
+        event.preventDefault();
+
+        const { currenTarget, dataTransfer } = event;
+
+        if (sourceContainer && draggedElement) {
+          sourceContainer.removeChild(draggedElement);
+        }
+
+        if (draggedElement) {
+          const src = dataTransfer.getData("text/plain");
+          const imgElement = createItem(src);
+          boardSection.appendChild(imgElement);
+        }
+        console.log("drop");
+      }
+      function handleDragOver(event) {
+        event.preventDefault();
+        console.log("dragOver");
+      }
+      function handleDragLeave(event) {
+        event.preventDefault();
+        console.log("dragLeave");
+      }
+
       function handlerDragStart(event) {
         draggedElement = event.target;
-        const sourceContainer = draggedElement.parentNode;
-        console.log(draggedElement);
+        sourceContainer = draggedElement.parentNode;
+        console.log("Source COntainer");
+        console.log(sourceContainer);
+        event = dataTransfer.setData("text/plain", draggedElement.src);
       }
 
       function handlerDragEnd(event) {
@@ -226,7 +259,7 @@
     </header>
     <main>
       <div class="board__section--container">
-        <section class="board__section">
+        <section id="field" class="board__section">
           <div class="board__field--local">
             <div class="local__area">
               <div class="local__area--small"></div>
