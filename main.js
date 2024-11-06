@@ -33,16 +33,13 @@ imageInput.addEventListener("change", (event) => {
 let draggedElement = null;
 let sourceContainer = null;
 
-
 const boardSection = $$(".field__section");
 
-boardSection.forEach(section => {
+boardSection.forEach((section) => {
   section.addEventListener("dragover", handleDragOver);
   section.addEventListener("drop", handleDrop);
   section.addEventListener("dragleave", handleDragLeave);
-
-})
-
+});
 
 function handleDrop(event) {
   event.preventDefault();
@@ -58,15 +55,23 @@ function handleDrop(event) {
     const imgElement = createItem(src);
     currentTarget.appendChild(imgElement);
   }
-
+  currentTarget.classList.remove("drag__over");
 }
 function handleDragOver(event) {
   event.preventDefault();
-  
+
+  const { currentTarget } = event;
+  if (sourceContainer === currentTarget) return;
+  currentTarget.classList.add("drag__over");
+
+  currentTarget.classList;
 }
 function handleDragLeave(event) {
   event.preventDefault();
-  
+
+  const { currentTarget } = event;
+
+  currentTarget.classList.remove("drag__over");
 }
 
 function handlerDragStart(event) {

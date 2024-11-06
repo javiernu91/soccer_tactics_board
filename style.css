@@ -176,6 +176,12 @@ body {
   border: solid 1px rgba(182, 255, 185, 0.2);
   margin: 0;
   padding: 0;
+  transition: all 0.3s ease;
+
+  &.drag__over {
+    scale: 1.01;
+    background-color: #22ff5933;
+  }
 }
 
 @media (max-width: 500px) {
