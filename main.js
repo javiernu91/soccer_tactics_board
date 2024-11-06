@@ -18,9 +18,7 @@ function createItem(src) {
   return imgElement;
 }
 
-imageInput.addEventListener("change", (event) => {
-  const { files } = event.target;
-
+function useFilesToCreateItems(files) {
   if (files && files.length > 0) {
     Array.from(files).forEach((file) => {
       const reader = new FileReader();
@@ -30,6 +28,11 @@ imageInput.addEventListener("change", (event) => {
       reader.readAsDataURL(file);
     });
   }
+}
+
+imageInput.addEventListener("change", (event) => {
+  const { files } = event.target;
+  useFilesToCreateItems(files);
 });
 
 let draggedElement = null;
