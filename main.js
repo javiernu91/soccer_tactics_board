@@ -19,14 +19,16 @@ function createItem(src) {
 }
 
 imageInput.addEventListener("change", (event) => {
-  const [file] = event.target.files;
+  const { files } = event.target;
 
-  if (file) {
-    const reader = new FileReader();
-    reader.onload = (eventReader) => {
-      createItem(eventReader.target.result);
-    };
-    reader.readAsDataURL(file);
+  if (files && files.length > 0) {
+    Array.from(files).forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (eventReader) => {
+        createItem(eventReader.target.result);
+      };
+      reader.readAsDataURL(file);
+    });
   }
 });
 
