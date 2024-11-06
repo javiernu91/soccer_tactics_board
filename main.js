@@ -41,6 +41,10 @@ boardSection.forEach((section) => {
   section.addEventListener("dragleave", handleDragLeave);
 });
 
+playersSection.addEventListener("dragover", handleDragOver);
+playersSection.addEventListener("drop", handleDrop);
+playersSection.addEventListener("dragleave", handleDragLeave);
+
 function handleDrop(event) {
   event.preventDefault();
 
