@@ -150,6 +150,7 @@ body {
   overflow: scroll;
   scrollbar-width: none;
   scroll-behavior: smooth;
+
   &.preview__drop--images {
     background: #444;
     border-style: dashed;
@@ -161,6 +162,11 @@ body {
   margin: 0 auto;
   object-fit: cover;
   cursor: grab;
+}
+
+.board__beench--section .player__image {
+  height: 20px;
+  width: 60px;
 }
 
 .field__container--section {

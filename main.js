@@ -58,6 +58,10 @@ function handleDropFromDesktop(event) {
   event.preventDefault();
   const { currentTarget, dataTransfer } = event;
 
+  if (sourceContainer && draggedElement) {
+    sourceContainer.removeChild(draggedElement);
+  }
+
   if (dataTransfer.types.includes("Files")) {
     currentTarget.classList.remove("preview__drop--images");
     const { files } = dataTransfer;
