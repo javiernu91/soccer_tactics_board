@@ -3,6 +3,7 @@ const $$ = (els) => document.querySelectorAll(els);
 
 const imageInput = $("#payer__input--image");
 const playersSection = $("#beench__section");
+const resetBtn = $(".player__button--reload");
 
 function createItem(src) {
   const imgElement = document.createElement("img");
@@ -14,7 +15,7 @@ function createItem(src) {
   imgElement.addEventListener("dragend", handlerDragEnd);
 
   playersSection.appendChild(imgElement);
-  console.log(imgElement);
+  // console.log(imgElement);
   return imgElement;
 }
 
@@ -93,3 +94,11 @@ function handlerDragEnd(event) {
   draggedElement = null;
   sourceContainer = null;
 }
+
+resetBtn.addEventListener("click", () => {
+  const items = $$(".field__container--section .field__section .player__image");
+  items.forEach((item) => {
+    item.remove();
+    playersSection.appendChild(item);
+  });
+});
