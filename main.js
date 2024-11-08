@@ -51,6 +51,29 @@ playersSection.addEventListener("dragover", handleDragOver);
 playersSection.addEventListener("drop", handleDrop);
 playersSection.addEventListener("dragleave", handleDragLeave);
 
+playersSection.addEventListener("drop", handleDropFromDesktop);
+playersSection.addEventListener("dragover", handleDragOverFromDesktop);
+
+function handleDropFromDesktop(event) {
+  event.preventDefault();
+  const { currentTarget, dataTransfer } = event;
+
+  if (dataTransfer.types.includes("Files")) {
+    currentTarget.classList.remove("preview__drop--images");
+    const { files } = dataTransfer;
+    useFilesToCreateItems(files);
+  }
+}
+
+function handleDragOverFromDesktop(event) {
+  event.preventDefault();
+  const { currentTarget, dataTransfer } = event;
+
+  if (dataTransfer.types.includes("Files")) {
+    currentTarget.classList.add("preview__drop--images");
+  }
+}
+
 function handleDrop(event) {
   event.preventDefault();
 

@@ -146,6 +146,14 @@ body {
   border: solid 1px #eee;
   background: #222;
   gap: 8px;
+  max-height: 80vh;
+  overflow: scroll;
+  scrollbar-width: none;
+  scroll-behavior: smooth;
+  &.preview__drop--images {
+    background: #444;
+    border-style: dashed;
+  }
 }
 
 .player__image {
