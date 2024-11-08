@@ -2,8 +2,9 @@ const $ = (el) => document.querySelector(el);
 const $$ = (els) => document.querySelectorAll(els);
 
 const imageInput = $("#payer__input--image");
-const playersSection = $("#beench__section");
+const playersSection = $(".players__beench--section");
 const resetBtn = $(".player__button--reload");
+const trashCan = $(".trash__section");
 
 function createItem(src) {
   const imgElement = document.createElement("img");
@@ -54,6 +55,10 @@ playersSection.addEventListener("dragleave", handleDragLeave);
 playersSection.addEventListener("drop", handleDropFromDesktop);
 playersSection.addEventListener("dragover", handleDragOverFromDesktop);
 
+trashCan.addEventListener("dragover", handleDragOver);
+trashCan.addEventListener("drop", handleDropDelete);
+trashCan.addEventListener("dragleave", handleDragLeave);
+
 function handleDropFromDesktop(event) {
   event.preventDefault();
   const { currentTarget, dataTransfer } = event;
@@ -63,10 +68,10 @@ function handleDropFromDesktop(event) {
   }
 
   if (dataTransfer.types.includes("Files")) {
-    currentTarget.classList.remove("preview__drop--images");
     const { files } = dataTransfer;
     useFilesToCreateItems(files);
   }
+  currentTarget.classList.remove("preview__drop--images");
 }
 
 function handleDragOverFromDesktop(event) {
@@ -93,6 +98,7 @@ function handleDrop(event) {
     currentTarget.appendChild(imgElement);
   }
   currentTarget.classList.remove("drag__over");
+  currentTarget.classList.remove("preview__drop--images");
 }
 function handleDragOver(event) {
   event.preventDefault();
@@ -100,6 +106,7 @@ function handleDragOver(event) {
   const { currentTarget } = event;
   if (sourceContainer === currentTarget) return;
   currentTarget.classList.add("drag__over");
+  currentTarget.classList.add("trash__drag--over");
 
   currentTarget.classList;
 }
@@ -109,6 +116,8 @@ function handleDragLeave(event) {
   const { currentTarget } = event;
 
   currentTarget.classList.remove("drag__over");
+  currentTarget.classList.remove("preview__drop--images");
+  currentTarget.classList.remove("trash__drag--over");
 }
 
 function handlerDragStart(event) {
@@ -120,6 +129,13 @@ function handlerDragStart(event) {
 function handlerDragEnd(event) {
   draggedElement = null;
   sourceContainer = null;
+}
+
+//delete the element
+
+function handleDropDelete(event) {
+  event.preventDefault();
+  draggedElement.remove();
 }
 
 resetBtn.addEventListener("click", () => {
