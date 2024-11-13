@@ -5,6 +5,8 @@ const imageInput = $("#payer__input--image");
 const playersSection = $(".players__beench--section");
 const resetBtn = $(".player__button--reload");
 const trashCan = $(".trash__section");
+const fieldColorBtn1 = $("#field__color--first");
+const fieldColorBtn2 = $("#field__color--second");
 
 function createItem(src) {
   const imgElement = document.createElement("img");
@@ -143,5 +145,50 @@ resetBtn.addEventListener("click", () => {
   items.forEach((item) => {
     item.remove();
     playersSection.appendChild(item);
+  });
+});
+
+//Change the field color
+
+function setFieldColor() {
+  const firstSectionField = $$(".field__section");
+  const allSections = [];
+  const imparSections = [];
+  const parSections = [];
+  firstSectionField.forEach((section) => {
+    allSections.push(section);
+  });
+
+  for (let i = 0; i < allSections.length; i++) {
+    if (i % 2 === 0) {
+      imparSections.push(allSections[i]);
+    } else {
+      parSections.push(allSections[i]);
+    }
+  }
+  return [parSections, imparSections];
+}
+
+//Impar elements
+fieldColorBtn1.addEventListener("input", () => {
+  console.log(fieldColorBtn1.value);
+  const [, imparSections] = setFieldColor();
+  const color = fieldColorBtn1.value;
+  imparSections.forEach((section) => {
+    section.style.backgroundColor = color;
+    section.style.opacity = 0.5;
+
+    // console.log(section.getData);
+  });
+  console.log(imparSections);
+});
+
+//Par elements
+fieldColorBtn2.addEventListener("input", () => {
+  const [parSections] = setFieldColor();
+  const color = fieldColorBtn2.value;
+  parSections.forEach((section) => {
+    section.style.backgroundColor = color;
+    section.style.opacity = 0.5;
   });
 });

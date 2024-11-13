@@ -35,7 +35,7 @@ body {
 .board__section {
   aspect-ratio: 75/120;
   height: 80vh;
-  background: green;
+  /* background: green; */
   padding: 18px;
   position: relative;
 }
@@ -174,18 +174,21 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: transparent;
+  background: #46ff6e88;
   width: 14.2857142857%;
-  height: 7%;
-  border: solid 1px rgba(182, 255, 185, 0.2);
+  height: 7.143%;
+  max-height: 20%;
+  border: none;
   margin: 0;
   padding: 0;
   transition: all 0.3s ease;
-
   &.drag__over {
-    scale: 1.01;
-    background-color: #22ff5933;
+    scale: 1.1;
   }
+}
+
+.field__color--input {
+  opacity: 0.5;
 }
 
 .players__beench--section {
