@@ -139,7 +139,7 @@ body {
 }
 
 .board__beench--section {
-  width: 80px;
+  width: 10%;
   display: flex;
   flex-direction: column;
   height: auto;
@@ -187,8 +187,34 @@ body {
   }
 }
 
+.settings__board--section {
+  width: 10%;
+  justify-content: center;
+}
+
+.inputs__color--container {
+  display: flex;
+  gap: 18px;
+  justify-content: start;
+  margin-top: 12px;
+}
+
 .field__color--input {
   opacity: 0.5;
+  display: block;
+  width: 100%;
+  height: 30px;
+  padding: 0.2em;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: transparent;
+  background-clip: padding-box;
+  border: 1px solid #555;
+  border-radius: 4px;
+  max-width: 3rem;
+  margin: 12px 0;
 }
 
 .players__beench--section {
